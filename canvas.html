@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<div>
+		<canvas id="c1" width="100px" height="100px"></canvas>
+	</div>
+</body>
+<script>
+var canvas = document.getElementById('c1');
+var ctx = canvas.getContext("2d");
+console.log(canvas.width);
+var radius = (canvas.width - 8)/2;
+var percent = 30;
+
+ ctx.translate(50, 50);
+ ctx.rotate(-90*Math.PI/180);
+ ctx.lineCap = "round";
+function drawCircle(color,lineWidth,percent){
+	ctx.beginPath();
+	ctx.arc(0, 0, radius, 0, Math.PI * 2 * percent/100);
+	ctx.strokeStyle = color;
+	ctx.lineWidth = lineWidth;
+	ctx.stroke();
+	
+}
+function animate(percent,tim) {
+	var radian = 0;
+	clearInterval(timeId);
+	var timeId = setInterval(function(){
+		radian+= 1 ;
+		console.log(radian);
+		drawCircle("blue",7,radian);
+		if (radian===percent) clearInterval(timeId);
+	},tim);
+}
+animate(percent,20);
+drawCircle("red",8,100);
+// drawCircle("blue",8,30);
+</script>
+</html>
